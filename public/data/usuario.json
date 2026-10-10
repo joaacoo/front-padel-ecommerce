@@ -1,0 +1,7 @@
+{
+  "id": 1,
+  "nombre": "Juan",
+  "email": "juan@test.com",
+  "sexo": "M",
+  "fechaNacimiento": "2006-03-27"
+}
