@@ -1,0 +1,23 @@
+.footer {
+  margin-top: var(--espacio-7);
+  background: var(--tinta);
+  color: var(--gris-borde);
+  font-size: 14px;
+  padding-block: var(--espacio-6);
+}
+
+.footer__fila {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
+.footer__logo {
+  color: var(--blanco);
+  font-family: var(--fuente-titulo);
+  font-weight: 900;
+  font-size: 24px;
+  text-transform: uppercase;
+}

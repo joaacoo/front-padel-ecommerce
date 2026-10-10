@@ -1,0 +1,75 @@
+.navbar__fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3) var(--espacio-6);
+}
+
+.navbar__superior {
+  background: var(--tinta);
+  color: var(--gris-borde);
+  font-size: 13px;
+  padding-block: var(--espacio-2);
+}
+
+.navbar__superior strong {
+  color: var(--blanco);
+}
+
+.navbar__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-2) var(--espacio-5);
+}
+
+.navbar__acciones a {
+  color: var(--gris-borde);
+  text-decoration: none;
+}
+
+.navbar__principal {
+  background: var(--blanco);
+  border-bottom: 1px solid var(--linea);
+  padding-block: var(--espacio-4);
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  color: var(--tinta);
+  text-decoration: none;
+  font-family: var(--fuente-titulo);
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.navbar__punto {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--azul);
+}
+
+.navbar__carrito {
+  display: flex;
+  align-items: center;
+  min-height: var(--alto-control);
+  padding: 0 var(--espacio-4);
+  background: var(--azul);
+  color: var(--blanco);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navbar__carrito:hover {
+  background: var(--azul-hover);
+}
+
+/* Lugar reservado para el buscador (Persona 2) */
+.navbar__espacio {
+  flex: 1 1 320px;
+}

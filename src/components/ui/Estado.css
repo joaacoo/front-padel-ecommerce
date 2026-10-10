@@ -1,0 +1,27 @@
+.estado {
+  margin: 0;
+  padding: var(--espacio-5);
+  color: var(--gris-texto);
+}
+
+.estado--error {
+  background: var(--peligro-suave);
+  color: var(--peligro);
+  font-weight: 600;
+}
+
+.estado--vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-2);
+  padding: var(--espacio-7) var(--espacio-5);
+  background: var(--blanco);
+  border: 1px dashed var(--gris-borde);
+  text-align: center;
+}
+
+.estado--vacio strong {
+  color: var(--tinta);
+  font-size: 18px;
+}

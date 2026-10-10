@@ -1,0 +1,93 @@
+/* Estilos base que aplican a toda la app. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--fuente-texto);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+a {
+  color: var(--azul);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+:focus-visible {
+  outline: 3px solid var(--azul);
+  outline-offset: 2px;
+}
+
+/* Contenedor central reutilizable: limita el ancho y deja margen a los costados. */
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding-inline: var(--espacio-5);
+}
+
+/* Campos de formulario */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+}
+
+.campo label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  height: var(--alto-control);
+  padding: 0 var(--espacio-3);
+  border: 1px solid var(--gris-borde);
+  background: var(--blanco);
+  color: var(--tinta);
+  font: inherit;
+}
+
+.campo textarea {
+  height: auto;
+  padding: var(--espacio-3);
+}
+
+/* Texto solo para lectores de pantalla */
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -1,0 +1,48 @@
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-2);
+  min-height: 44px;
+  padding: 0 var(--espacio-5);
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.boton:disabled {
+  background: var(--linea);
+  border-color: var(--linea);
+  color: var(--gris-texto);
+  cursor: not-allowed;
+}
+
+.boton--primario {
+  background: var(--azul);
+  color: var(--blanco);
+}
+
+.boton--primario:hover:not(:disabled) {
+  background: var(--azul-hover);
+}
+
+.boton--oscuro {
+  background: var(--tinta);
+  color: var(--blanco);
+}
+
+.boton--secundario {
+  background: var(--blanco);
+  border-color: var(--tinta);
+  color: var(--tinta);
+}
+
+.boton--peligro {
+  background: none;
+  color: var(--peligro);
+  padding-inline: var(--espacio-2);
+}

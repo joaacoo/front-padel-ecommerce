@@ -1,0 +1,38 @@
+/*
+ * Variables de diseño (sacadas del mockup).
+ * Regla: ningún componente escribe un color, una fuente o un tamaño "a mano".
+ * Siempre se usa una variable de acá: var(--azul), var(--espacio-4), etc.
+ */
+:root {
+  /* Colores */
+  --azul: #1e5ae8;
+  --azul-hover: #1747ba;
+  --azul-suave: #e8eefd;
+  --tinta: #0b0d10;
+  --gris-texto: #5e6470;
+  --gris-borde: #c9cdd4;
+  --linea: #e2e4e9;
+  --fondo: #f3f4f6;
+  --blanco: #ffffff;
+  --peligro: #b42318;
+  --peligro-suave: #fdecea;
+  --exito: #116b3a;
+  --exito-suave: #e5f4ec;
+
+  /* Tipografía */
+  --fuente-titulo: 'Big Shoulders Display', Impact, 'Arial Narrow', sans-serif;
+  --fuente-texto: 'Geist', 'Segoe UI', system-ui, sans-serif;
+
+  /* Espaciado (múltiplos de 4px) */
+  --espacio-1: 4px;
+  --espacio-2: 8px;
+  --espacio-3: 12px;
+  --espacio-4: 16px;
+  --espacio-5: 24px;
+  --espacio-6: 32px;
+  --espacio-7: 48px;
+
+  /* Otros */
+  --ancho-max: 1240px;
+  --alto-control: 46px;
+}

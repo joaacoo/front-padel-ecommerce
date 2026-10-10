@@ -1,16 +1,34 @@
-# React + Vite
+# Punto de Oro — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend del e-commerce de pádel (TPO de Aplicaciones Interactivas, UADE).
+React + Vite + react-router-dom. El backend está en [padel-ecommerce](https://github.com/joaacoo/padel-ecommerce).
 
-Currently, two official plugins are available:
+## Cómo correrlo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Abrí http://localhost:5173. La app lee datos locales de `public/data/`, así que no hace falta levantar el backend.
+Para usar el backend real: en `src/services/api.js`, cambiá `USAR_MOCKS` a `false`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Documentación
 
-## Expanding the ESLint configuration
+Leela antes de empezar tu pantalla:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [Guía del frontend](docs/guia-frontend.md): quién hace qué, carpetas, rutas, componentes, cómo pedir datos y checklist de PR.
+- [Contrato de datos](docs/contrato-api.md): la forma exacta de cada JSON y qué archivo crea cada uno.
+- [Wireflow](docs/wireflow.md): mapa de navegación.
+- [Diseño](docs/diseño/): mockups, wireframes y wireflow en PNG.
+
+## Estado de las pantallas
+
+| Pantalla | Responsable | Estado |
+|---|---|---|
+| Listado y búsqueda (ProductList) | Persona 2 | ⏳ Pendiente |
+| Detalle (ProductDetail) y Carrito | Persona 3 | ⏳ Pendiente |
+| Checkout, confirmación y Mis pedidos | Persona 4 | ⏳ Pendiente |
+| Login, Registro y Perfil | Persona 5 | ⏳ Pendiente |
+| Reseñas (ResenaList) | Persona 6 | ⏳ Pendiente |
+| Gestión de productos (admin) | Sin asignar | ⏳ Pendiente |
