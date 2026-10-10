@@ -16,13 +16,13 @@ Convenciones que sigue todo el equipo. Antes de abrir un PR, revisá el checklis
 | 2 | Listado, búsqueda y filtros | `pages/ProductList`, `components/producto/ProductCard.jsx` |
 | 3 | Detalle y carrito | `pages/ProductDetail`, `pages/Carrito` |
 | 4 | Checkout, confirmación y mis pedidos | `pages/Checkout`, `pages/MisPedidos` |
-| 5 | Login, registro y perfil | `pages/Login`, `pages/Registro`, `pages/Perfil` |
+| 5 | Login, registro y perfil | `pages/Login.jsx`, `pages/Register.jsx`, `pages/Profile.jsx`, `context/AuthContext.jsx` |
 | 6 | Reseñas y revisión final | `components/resena/ResenaList.jsx` (va dentro de `ProductDetail`) |
 | Sin asignar | Gestión de productos (admin) | `pages/admin/` |
 
 Cada pantalla pendiente es un archivo marcador (solo para que el router compile) con su ruta, su mockup y la sección del contrato. Quien la toma lo reemplaza entero.
 
-En el encabezado (`Navbar`) hay lugares reservados para otras personas: el buscador y las categorías (Persona 2), el saludo y "Cerrar sesión" (Persona 5) y la cantidad del carrito (Persona 3).
+En el encabezado (`Navbar`) hay lugares reservados para otras personas: el buscador y las categorías (Persona 2), el saludo y "Cerrar sesión" (Persona 5, ya conectado con `<AuthStatus />`) y la cantidad del carrito (Persona 3).
 
 ---
 

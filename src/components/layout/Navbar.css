@@ -17,6 +17,11 @@
   color: var(--blanco);
 }
 
+/* <AuthStatus /> (Persona 5) sobre la franja oscura */
+.navbar__superior .auth-status a {
+  color: var(--blanco);
+}
+
 .navbar__acciones {
   display: flex;
   flex-wrap: wrap;

@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom'
 import { RUTAS } from '../../routes/rutas'
+import AuthStatus from '../AuthStatus'
 import './Navbar.css'
 
 /*
  * Encabezado común a todas las pantallas con login (ver docs/diseño/mockups/).
  * Define el lugar de cada cosa; el contenido de algunas zonas lo agregan otras personas:
  *
- *  - Saludo con el nombre y "Cerrar sesión" → Persona 5 (estado de sesión).
- *    También decide mostrar "Mis productos" solo si el rol es ADMIN.
+ *  - Saludo con el nombre y "Cerrar sesión" → Persona 5: <AuthStatus />.
+ *    Mostrar "Mis productos" solo si el rol es ADMIN también depende de la sesión.
  *  - Buscador y franja de categorías        → Persona 2 (búsqueda y filtros).
  *  - Cantidad de productos en el carrito     → Persona 3 (estado del carrito).
  */
@@ -16,13 +17,11 @@ export default function Navbar() {
     <header className="navbar">
       <div className="navbar__superior">
         <div className="contenedor navbar__fila">
-          {/* Persona 5: saludo con el nombre del usuario */}
-          <span></span>
+          <AuthStatus />
           <nav className="navbar__acciones" aria-label="Mi cuenta">
             <Link to={RUTAS.PERFIL}>Mi perfil</Link>
             <Link to={RUTAS.MIS_PEDIDOS}>Mis pedidos</Link>
             <Link to={RUTAS.MIS_PRODUCTOS}>Mis productos</Link>
-            {/* Persona 5: botón "Cerrar sesión" */}
           </nav>
         </div>
       </div>

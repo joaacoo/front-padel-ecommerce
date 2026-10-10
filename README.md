@@ -29,6 +29,6 @@ Leela antes de empezar tu pantalla:
 | Listado y búsqueda (ProductList) | Persona 2 | ⏳ Pendiente |
 | Detalle (ProductDetail) y Carrito | Persona 3 | ⏳ Pendiente |
 | Checkout, confirmación y Mis pedidos | Persona 4 | ⏳ Pendiente |
-| Login, Registro y Perfil | Persona 5 | ⏳ Pendiente |
+| Login, Registro y Perfil | Persona 5 | ✅ Hecho (con datos de prueba) |
 | Reseñas (ResenaList) | Persona 6 | ⏳ Pendiente |
 | Gestión de productos (admin) | Sin asignar | ⏳ Pendiente |
