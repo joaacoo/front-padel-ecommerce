@@ -18,8 +18,44 @@
 }
 
 /* <AuthStatus /> (Persona 5) sobre la franja oscura */
+.navbar__superior .auth-status {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
 .navbar__superior .auth-status a {
   color: var(--blanco);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar__superior .auth-status a:hover {
+  text-decoration: underline;
+}
+
+.navbar__superior .auth-status .btn-small {
+  padding: 3px 8px;
+  font-size: 12px;
+  background: transparent;
+  color: var(--gris-borde);
+  border: 1px solid var(--gris-texto);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar__superior .auth-status .btn-primary {
+  background: var(--azul);
+  border-color: var(--azul);
+  color: var(--blanco) !important;
+  text-decoration: none !important;
+}
+
+.navbar__superior .auth-status .btn-primary:hover {
+  background: var(--azul-hover) !important;
+  border-color: var(--azul-hover) !important;
+  color: var(--blanco) !important;
 }
 
 .navbar__acciones {
@@ -59,19 +95,53 @@
   background: var(--azul);
 }
 
+.navbar__botones-derecha {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
 .navbar__carrito {
   display: flex;
   align-items: center;
+  gap: var(--espacio-2);
   min-height: var(--alto-control);
   padding: 0 var(--espacio-4);
   background: var(--azul);
   color: var(--blanco);
   font-weight: 600;
   text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .navbar__carrito:hover {
   background: var(--azul-hover);
+  transform: translateY(-1px);
+}
+
+.navbar__carrito-icono {
+  stroke: var(--blanco);
+}
+
+.navbar__btn-logout {
+  min-height: var(--alto-control);
+  padding: 0 var(--espacio-3);
+  background: transparent;
+  color: var(--gris-texto);
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  font-family: var(--fuente-texto);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar__btn-logout:hover {
+  background: var(--peligro-suave);
+  border-color: var(--peligro);
+  color: var(--peligro);
 }
 
 /* Lugar reservado para el buscador (Persona 2) */

@@ -1,0 +1,131 @@
+.tarjeta-producto {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--blanco);
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+}
+
+.tarjeta-producto:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  border-color: var(--gris-borde);
+}
+
+.tarjeta-producto--sin-stock {
+  opacity: 0.85;
+}
+
+.tarjeta-producto__enlace-imagen {
+  display: block;
+  text-decoration: none;
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+.tarjeta-producto__imagen-contenedor {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tarjeta-producto__imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.tarjeta-producto:hover .tarjeta-producto__imagen {
+  transform: scale(1.05);
+}
+
+.tarjeta-producto__sin-foto {
+  color: var(--gris-texto);
+  font-size: 0.875rem;
+}
+
+.tarjeta-producto__badge-stock {
+  position: absolute;
+  top: var(--espacio-2);
+  right: var(--espacio-2);
+  background-color: var(--peligro);
+  color: var(--blanco);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.tarjeta-producto__badge-categoria {
+  position: absolute;
+  bottom: var(--espacio-2);
+  left: var(--espacio-2);
+  background-color: rgba(11, 13, 16, 0.75);
+  color: var(--blanco);
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.tarjeta-producto__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--espacio-4);
+  gap: var(--espacio-3);
+}
+
+.tarjeta-producto__titulo {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.tarjeta-producto__titulo a {
+  color: var(--tinta);
+  text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.15s ease;
+}
+
+.tarjeta-producto__titulo a:hover {
+  color: var(--azul);
+}
+
+.tarjeta-producto__detalles {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.tarjeta-producto__precio {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--tinta);
+  font-family: var(--fuente-titulo);
+  letter-spacing: 0.5px;
+}
+
+.tarjeta-producto__stock {
+  font-size: 0.8rem;
+  color: var(--gris-texto);
+}
+
+.tarjeta-producto__acciones {
+  margin-top: var(--espacio-2);
+}

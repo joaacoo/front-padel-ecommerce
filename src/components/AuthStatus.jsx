@@ -16,14 +16,9 @@ export default function AuthStatus() {
 
   return (
     <div className="auth-status">
-      <Link to="/perfil">Hola, {usuario.nombre}</Link>
-      <button
-        type="button"
-        className="btn btn-small"
-        onClick={() => { logout(); navigate('/') }}
-      >
-        Cerrar sesión
-      </button>
+      <Link to="/perfil" className="auth-status__perfil-link">
+        Hola, {usuario.nombre}
+      </Link>
     </div>
   )
 }

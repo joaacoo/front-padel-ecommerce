@@ -17,7 +17,6 @@ Para usar el backend real: en `src/services/api.js`, cambiá `USAR_MOCKS` a `fal
 
 Leela antes de empezar tu pantalla:
 
-- [Guía del frontend](docs/guia-frontend.md): quién hace qué, carpetas, rutas, componentes, cómo pedir datos y checklist de PR.
 - [Contrato de datos](docs/contrato-api.md): la forma exacta de cada JSON y qué archivo crea cada uno.
 - [Wireflow](docs/wireflow.md): mapa de navegación.
 - [Diseño](docs/diseño/): mockups, wireframes y wireflow en PNG.
@@ -26,7 +25,7 @@ Leela antes de empezar tu pantalla:
 
 | Pantalla | Responsable | Estado |
 |---|---|---|
-| Listado y búsqueda (ProductList) | Persona 2 | ⏳ Pendiente |
+| Listado y búsqueda (ProductList) | Persona 2 | ✅ Hecho (con datos de prueba) |
 | Detalle (ProductDetail) y Carrito | Persona 3 | ⏳ Pendiente |
 | Checkout, confirmación y Mis pedidos | Persona 4 | ⏳ Pendiente |
 | Login, Registro y Perfil | Persona 5 | ✅ Hecho (con datos de prueba) |

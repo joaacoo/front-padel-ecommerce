@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "nombre": "Paleta Bullpadel Vertex 04 2024",
+    "descripcion": "Paleta de máxima potencia para jugadores profesionales o avanzados. Superficie rugosa Topspin para mayor agarre.",
+    "precio": 380000,
+    "stock": 8,
+    "categoria": "Paletas",
+    "imagenUrl": "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": 2,
+    "nombre": "Paleta Babolat Technical Viper",
+    "descripcion": "Potencia explosiva y precisión milimétrica en los golpes de ataque. Núcleo X-EVA con tres capas adaptadas.",
+    "precio": 365000,
+    "stock": 5,
+    "categoria": "Paletas",
+    "imagenUrl": "https://images.unsplash.com/photo-1599474924187-334a4ae5bd3c?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": 3,
+    "nombre": "Paleta Control 360",
+    "descripcion": "Paleta de control ideal para jugadores que buscan precisión en cada golpe y excelente maniobrabilidad.",
+    "precio": 245000,
+    "stock": 15,
+    "categoria": "Paletas",
+    "imagenUrl": "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": 4,
+    "nombre": "Paleta Head Speed Pro X",
+    "descripcion": "Diseñada para jugadores veloces que combinan control y potencia en la red. Tecnología Auxetic integrada.",
+    "precio": 320000,
+    "stock": 0,
+    "categoria": "Paletas",
+    "imagenUrl": "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": 5,
+    "nombre": "Tubo de Pelotas Bullpadel Next Pro (x3)",
+    "descripcion": "Pelota de máxima velocidad y durabilidad diseñada para pistas de pádel rápidas y entrenamientos intensivos.",
+    "precio": 12500,
+    "stock": 40,
+    "categoria": "Pelotas",
+    "imagenUrl": "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": 6,
+    "nombre": "Cajón de Pelotas Head Padel Pro (24 tubos)",
+    "descripcion": "La pelota oficial de los torneos más prestigiosos. Rebote homogéneo y excelente durabilidad del fieltro.",
+    "precio": 260000,
+    "stock": 6,
+    "categoria": "Pelotas",
+    "imagenUrl": "https://images.unsplash.com/photo-1560012057-4372e14c5085?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": 7,
+    "nombre": "Zapatillas Asics Gel-Resolution 9 Padel",
+    "descripcion": "Estabilidad avanzada y amortiguación Gel para desplazamientos laterales seguros en césped sintético.",
+    "precio": 210000,
+    "stock": 12,
+    "categoria": "Calzado",
+    "imagenUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": 8,
+    "nombre": "Paletero Bullpadel Hack BPP-24012",
+    "descripcion": "Paletero de gran capacidad con dos compartimentos térmicos para hasta 4 paletas y espacio ventilado para calzado.",
+    "precio": 115000,
+    "stock": 9,
+    "categoria": "Bolsos",
+    "imagenUrl": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": 9,
+    "nombre": "Pack 3 Overgrips Wilson Pro Comfort",
+    "descripcion": "Sensación inigualable y absorción superior del sudor para mantener el agarre firme durante todo el partido.",
+    "precio": 8500,
+    "stock": 60,
+    "categoria": "Accesorios",
+    "imagenUrl": "https://images.unsplash.com/photo-1560012057-4372e14c5085?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": 10,
+    "nombre": "Remera Técnica Siux Dry-Fit",
+    "descripcion": "Tejido transpirable y elástico de secado rápido para máxima comodidad en partidos exigentes.",
+    "precio": 35000,
+    "stock": 18,
+    "categoria": "Indumentaria",
+    "imagenUrl": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80"
+  }
+]
