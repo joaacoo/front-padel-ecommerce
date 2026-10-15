@@ -15,6 +15,7 @@ import Profile from './pages/Profile'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
 import ProductList from './pages/ProductList/ProductList'
 import Register from './pages/Register'
+import { CarritoProvider } from './context/CarritoContext'
 
 /*
  * Mapa de rutas de la app (ver docs/wireflow.md).
@@ -30,28 +31,31 @@ import Register from './pages/Register'
  */
 export default function App() {
   return (
-    <Routes>
-      <Route path={RUTAS.LOGIN} element={<Login />} />
-      <Route path={RUTAS.REGISTRO} element={<Register />} />
+    <CarritoProvider>
+      <Routes>
+        <Route path={RUTAS.LOGIN} element={<Login />} />
+        <Route path={RUTAS.REGISTRO} element={<Register />} />
 
-      <Route element={<RutaProtegida />}>
-        <Route element={<Layout />}>
-          <Route path={RUTAS.PRODUCTOS} element={<ProductList />} />
-          <Route path={RUTAS.PRODUCTO} element={<ProductDetail />} />
-          <Route path={RUTAS.CARRITO} element={<Carrito />} />
-          <Route path={RUTAS.CHECKOUT} element={<Checkout />} />
-          <Route path={RUTAS.MIS_PEDIDOS} element={<MisPedidos />} />
-          <Route path={RUTAS.PERFIL} element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route element={<RutaProtegida />}>
+          <Route element={<Layout />}>
+            <Route path={RUTAS.PRODUCTOS} element={<ProductList />} />
+            <Route path={RUTAS.PRODUCTO} element={<ProductDetail />} />
+            <Route path={RUTAS.CARRITO} element={<Carrito />} />
+            <Route path={RUTAS.CHECKOUT} element={<Checkout />} />
+            <Route path={RUTAS.MIS_PEDIDOS} element={<MisPedidos />} />
+            <Route path={RUTAS.PERFIL} element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
-          <Route element={<RutaAdmin />}>
-            <Route path={RUTAS.MIS_PRODUCTOS} element={<MisProductos />} />
-            <Route path={RUTAS.PUBLICAR_PRODUCTO} element={<PublicarProducto />} />
-            <Route path={RUTAS.EDITAR_PRODUCTO} element={<PublicarProducto />} />
+            <Route element={<RutaAdmin />}>
+              <Route path={RUTAS.MIS_PRODUCTOS} element={<MisProductos />} />
+              <Route path={RUTAS.PUBLICAR_PRODUCTO} element={<PublicarProducto />} />
+              <Route path={RUTAS.EDITAR_PRODUCTO} element={<PublicarProducto />} />
+            </Route>
           </Route>
         </Route>
-      </Route>
 
-      <Route path="*" element={<NoEncontrada />} />
-    </Routes>
+        <Route path="*" element={<NoEncontrada />} />
+      </Routes>
+    </CarritoProvider>
+    
   )
 }

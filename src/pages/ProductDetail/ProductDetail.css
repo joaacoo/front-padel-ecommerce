@@ -1,0 +1,251 @@
+
+.detalle {
+  padding-top: var(--espacio-5);
+  padding-bottom: var(--espacio-7);
+  min-height: 65vh;
+}
+
+.detalle__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--gris-texto);
+  margin-bottom: 28px;
+}
+
+.detalle__breadcrumb a {
+  color: var(--gris-texto);
+  text-decoration: none;
+}
+
+.detalle__breadcrumb strong {
+  color: var(--tinta);
+}
+
+.detalle__contenido {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Galería */
+
+.detalle__imagen-principal {
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  background: var(--blanco);
+  border: 1px solid var(--linea);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.detalle__imagen-principal img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.detalle__miniaturas {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.detalle__miniatura {
+  width: 70px;
+  height: 70px;
+  background: var(--blanco);
+  border: 1px solid var(--linea);
+  padding: 6px;
+}
+
+.detalle__miniatura--activa {
+  border: 2px solid var(--azul);
+}
+
+.detalle__miniatura img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Información */
+
+.detalle__informacion {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.detalle__categoria {
+  color: var(--azul);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.detalle__titulo {
+  font-size: clamp(2rem, 3vw, 3.2rem);
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.detalle__precio-stock {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.detalle__precio {
+  font-family: var(--fuente-titulo);
+  font-size: 2.3rem;
+  font-weight: 900;
+  color: var(--tinta);
+}
+
+.detalle__stock {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 5px 10px;
+}
+
+.detalle__stock--disponible {
+  background: #e2f4e8;
+  color: #247343;
+}
+
+.detalle__stock--agotado {
+  background: #111;
+  color: white;
+}
+
+.detalle__descripcion {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--gris-texto);
+}
+
+.detalle__alerta {
+  background: #fce8e6;
+  color: #9c2720;
+  padding: 14px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Compra */
+
+.detalle__compra {
+  border-top: 1px solid var(--linea);
+  padding-top: 18px;
+}
+
+.detalle__compra label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.detalle__acciones {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.detalle__contador {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--linea);
+  background: var(--blanco);
+  height: 46px;
+}
+
+.detalle__contador button {
+  width: 38px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.detalle__contador button:disabled {
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.detalle__contador span {
+  min-width: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.detalle__boton-carrito {
+  flex: 1;
+  min-width: 0;
+}
+
+.detalle__boton-carrito:disabled {
+  background: #e1e3e8;
+  color: #737782;
+  border-color: #e1e3e8;
+  cursor: not-allowed;
+}
+
+.detalle__limite {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--gris-texto);
+}
+
+.detalle__mensaje {
+  color: #247343;
+  font-size: 0.9rem;
+  margin-top: 12px;
+}
+
+.detalle__volver {
+  display: inline-block;
+  margin-top: 16px;
+  color: var(--azul);
+  font-weight: 600;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .detalle__contenido {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .detalle__imagen-principal {
+    aspect-ratio: 1 / 1;
+  }
+
+  .detalle__titulo {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .detalle__acciones {
+    flex-direction: column;
+  }
+
+  .detalle__contador {
+    justify-content: center;
+  }
+
+  .detalle__boton-carrito {
+    width: 100%;
+    min-height: 46px;
+  }
+}

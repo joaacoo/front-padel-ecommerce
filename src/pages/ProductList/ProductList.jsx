@@ -5,6 +5,7 @@ import ProductCard from '../../components/producto/ProductCard'
 import { Cargando, MensajeError, MensajeVacio } from '../../components/ui/Estado'
 import Boton from '../../components/ui/Boton'
 import './ProductList.css'
+import { useCarrito } from '../../context/CarritoContext'
 
 export default function ProductList() {
   const [productos, setProductos] = useState([])
@@ -12,6 +13,7 @@ export default function ProductList() {
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState(null)
 
+  const { agregarProducto } = useCarrito()
   const [searchParams, setSearchParams] = useSearchParams()
   const busqueda = searchParams.get('q') || ''
   const categoriaSeleccionada = searchParams.get('categoria') || 'Todas'
@@ -82,8 +84,11 @@ export default function ProductList() {
   }, [productos, busqueda, categoriaSeleccionada, soloStock, orden])
 
   const manejarAgregarAlCarrito = (producto) => {
-    // Feedback visual básico (la lógica completa del carrito la define Persona 3)
-    alert(`¡Agregaste "${producto.nombre}" al carrito!`)
+    const agregado = agregarProducto(producto, 1)
+
+    if (!agregado) {
+      alert('No hay stock suficiente para agregar este producto.')
+    }
   }
 
   const limpiarFiltros = () => {

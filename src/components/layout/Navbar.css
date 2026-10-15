@@ -148,3 +148,21 @@
 .navbar__espacio {
   flex: 1 1 320px;
 }
+
+
+.navbar__carrito-contador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+
+  background-color: var(--blanco);
+  color: var(--azul);
+
+  font-size: 0.8rem;
+  font-weight: 800;
+  border-radius: 3px;
+}

@@ -3,9 +3,11 @@ import { RUTAS } from '../../routes/rutas'
 import { useAuth } from '../../context/AuthContext'
 import AuthStatus from '../AuthStatus'
 import './Navbar.css'
+import { useCarrito } from '../../context/CarritoContext'
 
 export default function Navbar() {
   const { usuario, estaAutenticado, logout } = useAuth()
+  const { cantidadTotal } = useCarrito()
   const navigate = useNavigate()
   const esAdmin = usuario?.rol === 'ADMIN'
 
@@ -56,6 +58,9 @@ export default function Navbar() {
                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
               </svg>
               <span>Mi Carrito</span>
+              <span className="navbar__carrito-contador">
+                {cantidadTotal}
+              </span>
             </Link>
 
             {estaAutenticado && (
