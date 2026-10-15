@@ -1,0 +1,28 @@
+.compra.contenedor { max-width: 960px; padding-block: var(--espacio-7); overflow-wrap: anywhere; }
+.compra h1 { margin-bottom: var(--espacio-4); }
+.compra > p, .compra__confirmacion > p { color: var(--gris-texto); margin-bottom: var(--espacio-5); }
+.compra__resumen { margin-block: var(--espacio-6); border: 1px solid var(--linea); background: var(--blanco); }
+.compra__fila { display: flex; justify-content: space-between; gap: var(--espacio-5); padding: var(--espacio-5); border-bottom: 1px solid var(--linea); overflow-wrap: anywhere; }
+.compra__fila > :last-child { flex-shrink: 0; }
+.compra__fila small { display: block; color: var(--gris-texto); margin-top: var(--espacio-2); }
+.compra__cabecera { color: var(--gris-texto); text-transform: uppercase; font-weight: 700; }
+.compra__total { background: var(--fondo); border-bottom: 0; }
+.compra__aviso { padding: var(--espacio-5); background: var(--azul-suave); color: var(--azul-hover); margin-bottom: var(--espacio-5); }
+.compra__acciones { display: flex; gap: var(--espacio-4); margin-top: var(--espacio-6); flex-wrap: wrap; }
+.compra__acciones > * { flex: 1; text-align: center; text-decoration: none; }
+.compra__confirmacion { background: var(--blanco); border: 1px solid var(--linea); padding: var(--espacio-6); text-align: center; }
+.compra__check { display: inline-flex; padding: var(--espacio-4); background: var(--exito-suave); color: var(--exito); border-radius: 50%; margin-bottom: var(--espacio-5); }
+.compra__datos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--espacio-5); padding-block: var(--espacio-5); }
+.compra__datos dt { color: var(--gris-texto); margin-bottom: var(--espacio-2); }
+.compra__datos dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+.pedidos__lista { display: grid; gap: var(--espacio-4); margin-block: var(--espacio-6); }
+.pedidos__tarjeta { background: var(--blanco); padding: var(--espacio-5); border: 1px solid var(--linea); }
+.pedidos__tarjeta h2 { margin: 0; }
+@media (max-width: 600px) {
+  .compra { padding-block: var(--espacio-5); }
+  .compra__fila { padding: var(--espacio-4); gap: var(--espacio-3); }
+  .compra__fila > :last-child { flex-shrink: 1; text-align: right; }
+  .compra__acciones { flex-direction: column; }
+  .compra__datos { grid-template-columns: 1fr; text-align: left; }
+  .compra__confirmacion { padding: var(--espacio-5); }
+}

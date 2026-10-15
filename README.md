@@ -19,7 +19,7 @@ Backend: https://github.com/joaacoo/padel-ecommerce
 |---|---|---|
 | Listado y búsqueda (ProductList) | Persona 2 | Terminado |
 | Detalle (ProductDetail) y Carrito | Persona 3 | Pendiente |
-| Checkout, confirmación y Mis pedidos | Persona 4 | Pendiente |
+| Checkout, confirmación y Mis pedidos | Persona 4 | Implementado con mocks y servicio API; pendiente prueba contra backend |
 | Login, Registro y Perfil | Persona 5 | Terminado |
 | Reseñas (ResenaList) | Persona 6 | Pendiente |
 | Gestión de productos (admin) | Sin asignar | Pendiente |
