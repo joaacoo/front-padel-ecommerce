@@ -1,0 +1,52 @@
+.resena-form {
+  border: 1px solid var(--linea);
+  background: var(--blanco);
+  padding: var(--espacio-5);
+  margin-top: var(--espacio-6);
+}
+
+.resena-form__estrellas {
+  display: flex;
+  gap: 4px;
+  margin-bottom: var(--espacio-4);
+}
+
+.resena-form__estrella {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  color: var(--gris-borde);
+  line-height: 1;
+  padding: 0;
+}
+
+.resena-form__estrella--activa {
+  color: var(--azul);
+}
+
+.resena-form textarea {
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+  padding: 10px 12px;
+  border: 1px solid var(--gris-borde);
+  border-radius: 8px;
+  font: inherit;
+  color: var(--tinta);
+  background: var(--blanco);
+  box-sizing: border-box;
+}
+
+.resena-form textarea:focus {
+  outline: 2px solid var(--azul);
+}
+
+.resena-form textarea[aria-invalid='true'] {
+  border-color: var(--peligro);
+}
+
+.resena-form__exito {
+  color: var(--exito);
+  margin-top: var(--espacio-3);
+}

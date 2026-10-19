@@ -1,0 +1,48 @@
+.resenas {
+  border-top: 1px solid var(--linea);
+  padding-top: var(--espacio-6);
+  margin-top: var(--espacio-7);
+}
+
+.resenas__titulo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-5);
+}
+
+.resenas__promedio {
+  font-size: 0.9rem;
+  color: var(--gris-texto);
+}
+
+.resenas__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+}
+
+.resena {
+  border: 1px solid var(--linea);
+  background: var(--blanco);
+  padding: var(--espacio-4);
+}
+
+.resena__cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--espacio-2);
+}
+
+.resena__puntuacion {
+  color: var(--azul);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.resena__comentario {
+  color: var(--gris-texto);
+  line-height: 1.6;
+  margin: 0;
+}

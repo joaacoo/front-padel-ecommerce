@@ -2,21 +2,27 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { obtenerProductoPorId } from '../../services/productoService'
+import { obtenerResenasPorProducto } from '../../services/resenaService'
 import { RUTAS } from '../../routes/rutas'
 import { formatearPrecio } from '../../utils/formato'
 import Boton from '../../components/ui/Boton'
+import ResenaList from '../../components/resena/ResenaList'
+import ResenaForm from '../../components/resena/ResenaForm'
 import './ProductDetail.css'
 import { useCarrito } from '../../context/CarritoContext'
 
 export default function ProductDetail() {
   const { id } = useParams()
-   
+
   const { agregarProducto } = useCarrito()
   const [producto, setProducto] = useState(null)
   const [cantidad, setCantidad] = useState(1)
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState(null)
   const [mensaje, setMensaje] = useState('')
+  const [resenas, setResenas] = useState([])
+  const [cargandoResenas, setCargandoResenas] = useState(true)
+  const [errorResenas, setErrorResenas] = useState(null)
 
   useEffect(() => {
     let activo = true
@@ -42,6 +48,33 @@ export default function ProductDetail() {
       activo = false
     }
   }, [id])
+
+  useEffect(() => {
+    let activo = true
+
+    setCargandoResenas(true)
+    setErrorResenas(null)
+
+    obtenerResenasPorProducto(id)
+      .then((datos) => {
+        if (activo) setResenas(datos)
+      })
+      .catch((err) => {
+        if (activo) setErrorResenas(err.message)
+      })
+      .finally(() => {
+        if (activo) setCargandoResenas(false)
+      })
+
+    return () => {
+      activo = false
+    }
+  }, [id])
+
+  // Agrega la reseña recién creada al principio de la lista, sin recargar
+  const agregarResena = (nueva) => {
+    setResenas((actuales) => [nueva, ...actuales])
+  }
 
   if (cargando) {
     return (
@@ -227,6 +260,15 @@ export default function ProductDetail() {
 
           </div>
         </div>
+      </section>
+
+      <section className="resenas" aria-label="Reseñas del producto">
+        <ResenaList
+          resenas={resenas}
+          cargando={cargandoResenas}
+          error={errorResenas}
+        />
+        <ResenaForm productoId={producto.id} onCreada={agregarResena} />
       </section>
     </main>
   )

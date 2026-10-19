@@ -29,3 +29,12 @@ export function validarRegistro(datos) {
   }
   return errores
 }
+
+export function validarResena({ comentario, puntuacion }) {
+  const errores = {}
+  if (!comentario?.trim()) errores.comentario = 'El comentario es obligatorio'
+  if (!puntuacion || puntuacion < 1 || puntuacion > 5) {
+    errores.puntuacion = 'Elegí una puntuación de 1 a 5'
+  }
+  return errores
+}

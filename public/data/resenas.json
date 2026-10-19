@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "productoId": 1,
+    "usuarioId": 2,
+    "comentario": "Excelente potencia, se nota en cada golpe. Muy contento con la compra.",
+    "puntuacion": 5
+  },
+  {
+    "id": 2,
+    "productoId": 1,
+    "usuarioId": 3,
+    "comentario": "Buena paleta pero el agarre del mango se desgasta rápido.",
+    "puntuacion": 4
+  },
+  {
+    "id": 3,
+    "productoId": 3,
+    "usuarioId": 1,
+    "comentario": "La mejor relación precio-control que probé hasta ahora.",
+    "puntuacion": 5
+  }
+]
