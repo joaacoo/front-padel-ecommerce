@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(user))
     } catch {
-
+      /* noop */
     }
   }, [])
 

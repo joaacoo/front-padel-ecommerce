@@ -1,9 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 export default function AuthStatus() {
-  const { usuario, estaAutenticado, logout } = useAuth()
-  const navigate = useNavigate()
+  const { usuario, estaAutenticado } = useAuth()
 
   if (!estaAutenticado) {
     return (

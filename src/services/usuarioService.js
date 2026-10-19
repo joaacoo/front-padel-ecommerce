@@ -1,5 +1,5 @@
 const USE_MOCK = true
-const BASE_URL = '/api/users'
+const BASE_URL = '/api/usuarios'
 const MOCK_URL = '/data/usuario.json'
 
 async function request(url, options) {
