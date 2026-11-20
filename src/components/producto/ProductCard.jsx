@@ -39,8 +39,7 @@ export default function ProductCard({ producto, onAgregarAlCarrito }) {
         <div className="tarjeta-producto__acciones">
           <Boton
             variante="primario"
-            anchoCompleto
-            deshabilitado={sinStock}
+            disabled={sinStock}
             onClick={() => onAgregarAlCarrito && onAgregarAlCarrito(producto)}
           >
             {sinStock ? 'Sin stock' : 'Agregar al carrito'}

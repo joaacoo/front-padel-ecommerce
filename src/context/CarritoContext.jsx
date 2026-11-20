@@ -1,143 +1,117 @@
+import { useEffect, useMemo, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useAuth } from './AuthContext'
+import {
+  obtenerCarritoThunk,
+  agregarItemThunk,
+  modificarCantidadThunk,
+  quitarProductoThunk,
+  vaciarCarritoThunk
+} from '../store/slices/carritoSlice'
 
-import { createContext, useContext, useState, useEffect } from 'react'
+export function useCarrito() {
+  const dispatch = useDispatch()
+  const { usuario } = useAuth()
+  const { items, cargando, error } = useSelector((state) => state.carrito)
 
-const CarritoContext = createContext(null)
-
-export function CarritoProvider({ children }) {
-
-  // Recuperar el carrito guardado en localStorage
-  const [items, setItems] = useState(() => {
-    try {
-      const carritoGuardado = localStorage.getItem('carrito')
-      const datos = carritoGuardado ? JSON.parse(carritoGuardado) : []
-      return Array.isArray(datos) ? datos : []
-    } catch {
-      return []
-    }
-  })
-
-  // Guardar el carrito cada vez que cambia
+  // Sincronizar el carrito desde el backend al cambiar el usuario logueado
   useEffect(() => {
-    localStorage.setItem('carrito', JSON.stringify(items))
-  }, [items])
-
-  // Agregar un producto al carrito
-  const agregarProducto = (producto, cantidad = 1) => {
-    if (!Number.isInteger(cantidad) || cantidad <= 0) return false
-
-    const existente = items.find(
-      (item) => item.productoId === producto.id
-    )
-
-    const cantidadActual = existente?.cantidad ?? 0
-
-    if (cantidadActual + cantidad > producto.stock) {
-      return false
+    if (usuario?.id) {
+      dispatch(obtenerCarritoThunk(usuario.id))
     }
+  }, [dispatch, usuario?.id])
 
-    setItems((anteriores) => {
-      const encontrado = anteriores.find(
-        (item) => item.productoId === producto.id
-      )
+  const agregarProducto = useCallback(
+    (producto, cantidad = 1) => {
+      if (!Number.isInteger(cantidad) || cantidad <= 0) return false
 
-      if (encontrado) {
-        return anteriores.map((item) =>
-          item.productoId === producto.id
-            ? { ...item, cantidad: item.cantidad + cantidad }
-            : item
-        )
+      const existente = items.find((item) => item.productoId === producto.id)
+      const cantidadActual = existente?.cantidad ?? 0
+
+      if (cantidadActual + cantidad > producto.stock) {
+        return false
       }
 
-      return [
-        ...anteriores,
-        {
-          id: producto.id,
-          productoId: producto.id,
-          productoNombre: producto.nombre,
-          cantidad,
-          precioUnitario: producto.precio,
-          imagenUrl: producto.imagenUrl,
-          stock: producto.stock
-        }
-      ]
-    })
-
-    return true
-  }
-
-  // Modificar la cantidad de un producto
-  const actualizarCantidad = (productoId, nuevaCantidad) => {
-    setItems((anteriores) =>
-      anteriores.map((item) => {
-        if (item.productoId !== productoId) return item
-
-        if (
-          !Number.isInteger(nuevaCantidad) ||
-          nuevaCantidad < 1 ||
-          nuevaCantidad > item.stock
-        ) {
-          return item
-        }
-
-        return { ...item, cantidad: nuevaCantidad }
-      })
-    )
-  }
-
-  // Eliminar un producto del carrito
-  const eliminarProducto = (productoId) => {
-    setItems((anteriores) =>
-      anteriores.filter(
-        (item) => item.productoId !== productoId
+      dispatch(
+        agregarItemThunk({
+          usuarioId: usuario?.id,
+          producto,
+          cantidad
+        })
       )
-    )
+      return true
+    },
+    [dispatch, items, usuario?.id]
+  )
+
+  const actualizarCantidad = useCallback(
+    (productoId, nuevaCantidad) => {
+      const item = items.find((i) => i.productoId === productoId)
+      if (!item) return
+
+      if (
+        !Number.isInteger(nuevaCantidad) ||
+        nuevaCantidad < 1 ||
+        nuevaCantidad > item.stock
+      ) {
+        return
+      }
+
+      dispatch(
+        modificarCantidadThunk({
+          itemId: item.id,
+          cantidad: nuevaCantidad,
+          productoId
+        })
+      )
+    },
+    [dispatch, items]
+  )
+
+  const eliminarProducto = useCallback(
+    (productoId) => {
+      dispatch(
+        quitarProductoThunk({
+          usuarioId: usuario?.id,
+          productoId
+        })
+      )
+    },
+    [dispatch, usuario?.id]
+  )
+
+  const vaciarCarrito = useCallback(() => {
+    dispatch(vaciarCarritoThunk(usuario?.id))
+  }, [dispatch, usuario?.id])
+
+  const cantidadTotal = useMemo(
+    () => items.reduce((total, item) => total + item.cantidad, 0),
+    [items]
+  )
+
+  const total = useMemo(
+    () =>
+      items.reduce(
+        (acumulado, item) => acumulado + item.precioUnitario * item.cantidad,
+        0
+      ),
+    [items]
+  )
+
+  return {
+    items,
+    cargando,
+    error,
+    agregarProducto,
+    actualizarCantidad,
+    eliminarProducto,
+    vaciarCarrito,
+    cantidadTotal,
+    total
   }
-
-  // Vaciar el carrito completamente
-  const vaciarCarrito = () => {
-    setItems([])
-  }
-
-  // Calcular la cantidad total de unidades
-  const cantidadTotal = items.reduce(
-    (total, item) => total + item.cantidad,
-    0
-  )
-
-  // Calcular el precio total del carrito
-  const total = items.reduce(
-    (acumulado, item) =>
-      acumulado + item.precioUnitario * item.cantidad,
-    0
-  )
-
-  // Compartir los datos y funciones con los componentes
-  return (
-    <CarritoContext.Provider
-      value={{
-        items,
-        agregarProducto,
-        actualizarCantidad,
-        eliminarProducto,
-        vaciarCarrito,
-        cantidadTotal,
-        total
-      }}
-    >
-      {children}
-    </CarritoContext.Provider>
-  )
 }
 
-// Hook para acceder al carrito desde otros componentes
-export function useCarrito() {
-  const contexto = useContext(CarritoContext)
-
-  if (!contexto) {
-    throw new Error(
-      'useCarrito debe utilizarse dentro de CarritoProvider'
-    )
-  }
-
-  return contexto
+// Mantener compatibilidad con <CarritoProvider /> para que no rompa el JSX si está envuelto
+export function CarritoProvider({ children }) {
+  return children
 }
