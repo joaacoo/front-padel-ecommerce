@@ -15,7 +15,6 @@ import Profile from './pages/Profile'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
 import ProductList from './pages/ProductList/ProductList'
 import Register from './pages/Register'
-import { CarritoProvider } from './context/CarritoContext'
 
 /*
  * Mapa de rutas de la app (ver docs/wireflow.md).
@@ -31,8 +30,7 @@ import { CarritoProvider } from './context/CarritoContext'
  */
 export default function App() {
   return (
-    <CarritoProvider>
-      <Routes>
+    <Routes>
         <Route path={RUTAS.LOGIN} element={<Login />} />
         <Route path={RUTAS.REGISTRO} element={<Register />} />
 
@@ -55,7 +53,5 @@ export default function App() {
 
         <Route path="*" element={<NoEncontrada />} />
       </Routes>
-    </CarritoProvider>
-    
   )
 }

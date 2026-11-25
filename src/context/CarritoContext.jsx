@@ -110,8 +110,3 @@ export function useCarrito() {
     total
   }
 }
-
-// Mantener compatibilidad con <CarritoProvider /> para que no rompa el JSX si está envuelto
-export function CarritoProvider({ children }) {
-  return children
-}
