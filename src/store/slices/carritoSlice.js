@@ -2,6 +2,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import * as carritoService from '../../services/carritoService'
 import { normalizarItem } from '../../utils/carrito'
 
+
+const initialState = {
+  items: [],
+  cargando: false,
+  error: null
+}
+
+
 export const obtenerCarritoThunk = createAsyncThunk(
   'carrito/obtenerCarrito',
   async (usuarioId, { rejectWithValue }) => {
@@ -73,11 +81,6 @@ export const vaciarCarritoThunk = createAsyncThunk(
   }
 )
 
-const initialState = {
-  items: [],
-  cargando: false,
-  error: null
-}
 
 const carritoSlice = createSlice({
   name: 'carrito',
@@ -182,6 +185,7 @@ const carritoSlice = createSlice({
       })
   }
 })
+
 
 export const { limpiarEstadoCarrito } = carritoSlice.actions
 export default carritoSlice.reducer
