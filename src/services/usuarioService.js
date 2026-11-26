@@ -1,4 +1,4 @@
-const USE_MOCK = true
+const USE_MOCK = false
 const BASE_URL = '/api/usuarios'
 const MOCK_URL = '/data/usuario.json'
 
@@ -17,10 +17,18 @@ async function request(url, options) {
   return data
 }
 
-// POST /api/users/login  -> LoginUsuarioRequest { email, password } -> UsuarioResponse
-function login({ email, password }) {
+// POST /api/usuarios/login -> UsuarioResponse + POST /api/auth/login -> AuthResponse { token }
+async function login({ email, password }) {
   if (USE_MOCK) return request(MOCK_URL)
-  return request(`${BASE_URL}/login`, { method: 'POST', body: JSON.stringify({ email, password }) })
+  const usuario = await request(`${BASE_URL}/login`, {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  })
+  const auth = await request('/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  })
+  return { ...usuario, token: auth.token }
 }
 
 // POST /api/users/register -> RegistroUsuarioRequest -> UsuarioResponse

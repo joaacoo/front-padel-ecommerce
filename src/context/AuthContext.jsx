@@ -21,6 +21,9 @@ export function AuthProvider({ children }) {
     setUsuario(user)
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(user))
+      if (user?.token) {
+        localStorage.setItem('token', user.token)
+      }
     } catch {
       /* noop */
     }
@@ -42,6 +45,7 @@ export function AuthProvider({ children }) {
     setUsuario(null)
     try {
       localStorage.removeItem(STORAGE_KEY)
+      localStorage.removeItem('token')
     } catch {
       /* noop */
     }

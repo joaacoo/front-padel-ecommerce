@@ -7,7 +7,7 @@
  * Es el ÚNICO interruptor que hay que tocar para pasar de datos locales a la API real.
  * En los dos casos se usa fetch, así que los componentes no cambian.
  */
-export const USAR_MOCKS = true
+export const USAR_MOCKS = false
 
 export const API_URL = 'http://localhost:8080'
 
