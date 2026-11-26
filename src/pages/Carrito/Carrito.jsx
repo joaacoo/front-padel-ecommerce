@@ -1,20 +1,61 @@
 
 import { Link } from 'react-router-dom'
-import { useCarrito } from '../../context/CarritoContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { useAuth } from '../../context/AuthContext'
+import {
+  modificarCantidadThunk,
+  quitarProductoThunk,
+  vaciarCarritoThunk
+} from '../../store/slices/carritoSlice'
 import { RUTAS, rutaProducto } from '../../routes/rutas'
 import { formatearPrecio } from '../../utils/formato'
 import Boton from '../../components/ui/Boton'
 import './Carrito.css'
 
 export default function Carrito() {
-  const {
-    items,
-    actualizarCantidad,
-    eliminarProducto,
-    vaciarCarrito,
-    cantidadTotal,
-    total
-  } = useCarrito()
+  const dispatch = useDispatch()
+  const { usuario } = useAuth()
+  const { items, cargando, error } = useSelector((state) => state.carrito)
+
+  const cantidadTotal = items.reduce((total, item) => total + item.cantidad, 0)
+  const total = items.reduce(
+    (acumulado, item) => acumulado + item.precioUnitario * item.cantidad,
+    0
+  )
+
+  const actualizarCantidad = (productoId, nuevaCantidad) => {
+    const item = items.find((i) => i.productoId === productoId)
+    if (!item) return
+
+    if (
+      !Number.isInteger(nuevaCantidad) ||
+      nuevaCantidad < 1 ||
+      nuevaCantidad > item.stock
+    ) {
+      return
+    }
+
+    dispatch(
+      modificarCantidadThunk({
+        itemId: item.id,
+        cantidad: nuevaCantidad,
+        productoId
+      })
+    )
+  }
+
+  const eliminarProducto = (productoId) => {
+    dispatch(
+      quitarProductoThunk({
+        usuarioId: usuario?.id,
+        productoId
+      })
+    )
+  }
+
+  const vaciarCarrito = () => {
+    dispatch(vaciarCarritoThunk(usuario?.id))
+  }
 
   return (
     <main className="carrito contenedor">

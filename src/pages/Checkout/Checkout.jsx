@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { useAuth } from '../../context/AuthContext'
-import { useCarrito } from '../../context/CarritoContext'
+import { vaciarCarritoThunk } from '../../store/slices/carritoSlice'
 import { crearPedido } from '../../services/pedidoService'
 import { RUTAS } from '../../routes/rutas'
 import { formatearFecha, formatearPrecio } from '../../utils/formato'
@@ -10,8 +11,13 @@ import { MensajeError, MensajeVacio } from '../../components/ui/Estado'
 import './Checkout.css'
 
 export default function Checkout() {
+  const dispatch = useDispatch()
   const { usuario } = useAuth()
-  const { items, total, vaciarCarrito } = useCarrito()
+  const items = useSelector((state) => state.carrito.items)
+  const total = items.reduce(
+    (acumulado, item) => acumulado + item.precioUnitario * item.cantidad,
+    0
+  )
   const [pedido, setPedido] = useState(null)
   const [enviando, setEnviando] = useState(false)
   const [error, setError] = useState('')
@@ -26,7 +32,7 @@ export default function Checkout() {
     try {
       const creado = await crearPedido(usuario?.id, items)
       setPedido(creado)
-      vaciarCarrito()
+      await dispatch(vaciarCarritoThunk(usuario?.id)).unwrap()
     } catch (error) {
       setError(error.message || 'No pudimos confirmar el pedido.')
     } finally {

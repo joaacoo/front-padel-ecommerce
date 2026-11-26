@@ -1,20 +1,25 @@
 
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { obtenerProductoPorId } from '../../services/productoService'
 import { obtenerResenasPorProducto } from '../../services/resenaService'
+import { useAuth } from '../../context/AuthContext'
+import { agregarItemThunk } from '../../store/slices/carritoSlice'
+import { tieneStockDisponible } from '../../utils/carrito'
 import { RUTAS } from '../../routes/rutas'
 import { formatearPrecio } from '../../utils/formato'
 import Boton from '../../components/ui/Boton'
 import ResenaList from '../../components/resena/ResenaList'
 import ResenaForm from '../../components/resena/ResenaForm'
 import './ProductDetail.css'
-import { useCarrito } from '../../context/CarritoContext'
 
 export default function ProductDetail() {
   const { id } = useParams()
 
-  const { agregarProducto } = useCarrito()
+  const dispatch = useDispatch()
+  const { usuario } = useAuth()
+  const itemsCarrito = useSelector((state) => state.carrito.items)
   const [producto, setProducto] = useState(null)
   const [cantidad, setCantidad] = useState(1)
   const [cargando, setCargando] = useState(true)
@@ -108,15 +113,25 @@ export default function ProductDetail() {
     )
   }
 
-  const agregarAlCarrito = () => {
-    const agregado = agregarProducto(producto, cantidad)
+  const agregarAlCarrito = async () => {
+    if (!tieneStockDisponible(itemsCarrito, producto, cantidad)) {
+      setMensaje('No hay stock suficiente para agregar esa cantidad.')
+      return
+    }
 
-    if (agregado) {
+    try {
+      await dispatch(
+        agregarItemThunk({
+          usuarioId: usuario?.id,
+          producto,
+          cantidad
+        })
+      ).unwrap()
       setMensaje(
         `Agregaste ${cantidad} unidad(es) de ${producto.nombre} al carrito.`
       )
-    } else {
-      setMensaje('No hay stock suficiente para agregar esa cantidad.')
+    } catch (err) {
+      setMensaje(err || 'No se pudo agregar el producto al carrito.')
     }
   }
 

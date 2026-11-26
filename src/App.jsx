@@ -16,42 +16,31 @@ import ProductDetail from './pages/ProductDetail/ProductDetail'
 import ProductList from './pages/ProductList/ProductList'
 import Register from './pages/Register'
 
-/*
- * Mapa de rutas de la app (ver docs/wireflow.md).
- *
- * Públicas      → Login, Registro (sin encabezado)
- * Con login     → todo lo que está dentro de <RutaProtegida />
- * Solo ADMIN    → lo que está dentro de <RutaAdmin />
- *
- * <Layout /> agrega el encabezado y el pie a todas las pantallas internas.
- *
- * Login, Registro y Perfil son de la Persona 5. El Perfil va además dentro de su
- * <ProtectedRoute />, porque necesita un usuario logueado para mostrar sus datos.
- */
+
 export default function App() {
   return (
     <Routes>
-        <Route path={RUTAS.LOGIN} element={<Login />} />
-        <Route path={RUTAS.REGISTRO} element={<Register />} />
+      <Route path={RUTAS.LOGIN} element={<Login />} />
+      <Route path={RUTAS.REGISTRO} element={<Register />} />
 
-        <Route element={<RutaProtegida />}>
-          <Route element={<Layout />}>
-            <Route path={RUTAS.PRODUCTOS} element={<ProductList />} />
-            <Route path={RUTAS.PRODUCTO} element={<ProductDetail />} />
-            <Route path={RUTAS.CARRITO} element={<Carrito />} />
-            <Route path={RUTAS.CHECKOUT} element={<Checkout />} />
-            <Route path={RUTAS.MIS_PEDIDOS} element={<MisPedidos />} />
-            <Route path={RUTAS.PERFIL} element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+      <Route element={<RutaProtegida />}>
+        <Route element={<Layout />}>
+          <Route path={RUTAS.PRODUCTOS} element={<ProductList />} />
+          <Route path={RUTAS.PRODUCTO} element={<ProductDetail />} />
+          <Route path={RUTAS.CARRITO} element={<Carrito />} />
+          <Route path={RUTAS.CHECKOUT} element={<Checkout />} />
+          <Route path={RUTAS.MIS_PEDIDOS} element={<MisPedidos />} />
+          <Route path={RUTAS.PERFIL} element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
-            <Route element={<RutaAdmin />}>
-              <Route path={RUTAS.MIS_PRODUCTOS} element={<MisProductos />} />
-              <Route path={RUTAS.PUBLICAR_PRODUCTO} element={<PublicarProducto />} />
-              <Route path={RUTAS.EDITAR_PRODUCTO} element={<PublicarProducto />} />
-            </Route>
+          <Route element={<RutaAdmin />}>
+            <Route path={RUTAS.MIS_PRODUCTOS} element={<MisProductos />} />
+            <Route path={RUTAS.PUBLICAR_PRODUCTO} element={<PublicarProducto />} />
+            <Route path={RUTAS.EDITAR_PRODUCTO} element={<PublicarProducto />} />
           </Route>
         </Route>
+      </Route>
 
-        <Route path="*" element={<NoEncontrada />} />
-      </Routes>
+      <Route path="*" element={<NoEncontrada />} />
+    </Routes>
   )
 }

@@ -1,13 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { RUTAS } from '../../routes/rutas'
 import { useAuth } from '../../context/AuthContext'
 import AuthStatus from '../AuthStatus'
 import './Navbar.css'
-import { useCarrito } from '../../context/CarritoContext'
 
 export default function Navbar() {
   const { usuario, estaAutenticado, logout } = useAuth()
-  const { cantidadTotal } = useCarrito()
+  const cantidadTotal = useSelector((state) =>
+    state.carrito.items.reduce((total, item) => total + item.cantidad, 0)
+  )
   const navigate = useNavigate()
   const esAdmin = usuario?.rol === 'ADMIN'
 

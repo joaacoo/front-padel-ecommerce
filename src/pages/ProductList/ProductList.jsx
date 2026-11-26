@@ -1,11 +1,14 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { obtenerProductos, obtenerCategorias } from '../../services/productoService'
+import { useAuth } from '../../context/AuthContext'
+import { agregarItemThunk } from '../../store/slices/carritoSlice'
+import { tieneStockDisponible } from '../../utils/carrito'
 import ProductCard from '../../components/producto/ProductCard'
 import { Cargando, MensajeError, MensajeVacio } from '../../components/ui/Estado'
 import Boton from '../../components/ui/Boton'
 import './ProductList.css'
-import { useCarrito } from '../../context/CarritoContext'
 
 export default function ProductList() {
   const [productos, setProductos] = useState([])
@@ -13,7 +16,9 @@ export default function ProductList() {
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState(null)
 
-  const { agregarProducto } = useCarrito()
+  const dispatch = useDispatch()
+  const { usuario } = useAuth()
+  const itemsCarrito = useSelector((state) => state.carrito.items)
   const [searchParams, setSearchParams] = useSearchParams()
   const busqueda = searchParams.get('q') || ''
   const categoriaSeleccionada = searchParams.get('categoria') || 'Todas'
@@ -83,11 +88,22 @@ export default function ProductList() {
       })
   }, [productos, busqueda, categoriaSeleccionada, soloStock, orden])
 
-  const manejarAgregarAlCarrito = (producto) => {
-    const agregado = agregarProducto(producto, 1)
-
-    if (!agregado) {
+  const manejarAgregarAlCarrito = async (producto) => {
+    if (!tieneStockDisponible(itemsCarrito, producto, 1)) {
       alert('No hay stock suficiente para agregar este producto.')
+      return
+    }
+
+    try {
+      await dispatch(
+        agregarItemThunk({
+          usuarioId: usuario?.id,
+          producto,
+          cantidad: 1
+        })
+      ).unwrap()
+    } catch (err) {
+      alert(err || 'No se pudo agregar el producto al carrito.')
     }
   }
 
