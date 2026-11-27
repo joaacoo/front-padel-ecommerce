@@ -1,4 +1,7 @@
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
+import { verificarSesionThunk } from './store/slices/authSlice'
 import Layout from './components/layout/Layout'
 import ProtectedRoute from './components/ProtectedRoute'
 import RutaAdmin from './routes/RutaAdmin'
@@ -18,6 +21,12 @@ import Register from './pages/Register'
 
 
 export default function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(verificarSesionThunk())
+  }, [dispatch])
+
   return (
     <Routes>
       <Route path={RUTAS.LOGIN} element={<Login />} />

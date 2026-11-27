@@ -1,20 +1,22 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RUTAS } from '../../routes/rutas'
-import { useAuth } from '../../context/AuthContext'
+import { logoutThunk } from '../../store/slices/authSlice'
 import AuthStatus from '../AuthStatus'
 import './Navbar.css'
 
 export default function Navbar() {
-  const { usuario, estaAutenticado, logout } = useAuth()
+  const dispatch = useDispatch()
+  const usuario = useSelector((state) => state.auth.usuario)
+  const estaAutenticado = useSelector((state) => state.auth.estaAutenticado)
   const cantidadTotal = useSelector((state) =>
     state.carrito.items.reduce((total, item) => total + item.cantidad, 0)
   )
   const navigate = useNavigate()
   const esAdmin = usuario?.rol === 'ADMIN'
 
-  const manejarLogout = () => {
-    logout()
+  const manejarLogout = async () => {
+    await dispatch(logoutThunk())
     navigate('/')
   }
 

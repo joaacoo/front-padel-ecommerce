@@ -1,7 +1,6 @@
 
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useAuth } from '../../context/AuthContext'
 import {
   modificarCantidadThunk,
   quitarProductoThunk,
@@ -14,7 +13,7 @@ import './Carrito.css'
 
 export default function Carrito() {
   const dispatch = useDispatch()
-  const { usuario } = useAuth()
+  const usuario = useSelector((state) => state.auth.usuario)
   const { items, cargando, error } = useSelector((state) => state.carrito)
 
   const cantidadTotal = items.reduce((total, item) => total + item.cantidad, 0)

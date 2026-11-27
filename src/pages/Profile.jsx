@@ -1,24 +1,32 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutThunk } from '../store/slices/authSlice'
 import { usuarioService } from '../services/usuarioService'
 
 const SEXOS = { M: 'Masculino', F: 'Femenino', Otro: 'Otro' }
 
 // El backend solo expone GET /api/users/{id}: El perfil esta solo en modo lectura
 export default function Profile() {
-  const { usuario, logout } = useAuth()
+  const dispatch = useDispatch()
+  const usuario = useSelector((state) => state.auth.usuario)
   const navigate = useNavigate()
   const [perfil, setPerfil] = useState(usuario)
   const [error, setError] = useState('')
 
   useEffect(() => {
+    if (!usuario?.id) return
     let activo = true
     usuarioService.getById(usuario.id)
       .then((data) => activo && setPerfil(data))
       .catch((err) => activo && setError(err.message))
     return () => { activo = false }
-  }, [usuario.id])
+  }, [usuario?.id])
+
+  const manejarLogout = async () => {
+    await dispatch(logoutThunk())
+    navigate('/')
+  }
 
   return (
     <main className="auth-page">
@@ -31,7 +39,7 @@ export default function Profile() {
           <div><dt>Sexo</dt><dd>{SEXOS[perfil.sexo] || perfil.sexo || '—'}</dd></div>
           <div><dt>Fecha de nacimiento</dt><dd>{perfil.fechaNacimiento || '—'}</dd></div>
         </dl>
-        <button type="button" className="btn" onClick={() => { logout(); navigate('/') }}>
+        <button type="button" className="btn" onClick={manejarLogout}>
           Cerrar sesión
         </button>
       </section>

@@ -2,13 +2,27 @@ import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { obtenerProductos, obtenerCategorias } from '../../services/productoService'
-import { useAuth } from '../../context/AuthContext'
 import { agregarItemThunk } from '../../store/slices/carritoSlice'
 import { tieneStockDisponible } from '../../utils/carrito'
 import ProductCard from '../../components/producto/ProductCard'
 import { Cargando, MensajeError, MensajeVacio } from '../../components/ui/Estado'
 import Boton from '../../components/ui/Boton'
 import './ProductList.css'
+
+const CLAVE_ORDEN_STORAGE = 'catalogo_orden'
+const OPCIONES_ORDEN_VALIDAS = ['nombre-asc', 'precio-asc', 'precio-desc', 'defecto']
+
+function obtenerOrdenGuardado() {
+  try {
+    const guardado = localStorage.getItem(CLAVE_ORDEN_STORAGE)
+    if (guardado && OPCIONES_ORDEN_VALIDAS.includes(guardado)) {
+      return guardado
+    }
+  } catch {
+    /* noop */
+  }
+  return 'nombre-asc'
+}
 
 export default function ProductList() {
   const [productos, setProductos] = useState([])
@@ -17,12 +31,13 @@ export default function ProductList() {
   const [error, setError] = useState(null)
 
   const dispatch = useDispatch()
-  const { usuario } = useAuth()
+  const usuario = useSelector((state) => state.auth.usuario)
   const itemsCarrito = useSelector((state) => state.carrito.items)
   const [searchParams, setSearchParams] = useSearchParams()
   const busqueda = searchParams.get('q') || ''
   const categoriaSeleccionada = searchParams.get('categoria') || 'Todas'
-  const orden = searchParams.get('orden') || 'defecto'
+  const ordenParam = searchParams.get('orden')
+  const orden = OPCIONES_ORDEN_VALIDAS.includes(ordenParam) ? ordenParam : obtenerOrdenGuardado()
   const soloStock = searchParams.get('enStock') === 'true'
 
   // Carga inicial de productos y categorías
@@ -50,6 +65,13 @@ export default function ProductList() {
 
   // Actualiza los parámetros de búsqueda en la URL
   const actualizarParametro = (clave, valor) => {
+    if (clave === 'orden' && OPCIONES_ORDEN_VALIDAS.includes(valor)) {
+      try {
+        localStorage.setItem(CLAVE_ORDEN_STORAGE, valor)
+      } catch {
+        /* noop */
+      }
+    }
     const nuevosParams = new URLSearchParams(searchParams)
     if (!valor || valor === 'Todas' || valor === 'defecto' || valor === false) {
       nuevosParams.delete(clave)

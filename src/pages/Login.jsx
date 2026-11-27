@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import FormField from '../components/FormField'
-import { useAuth } from '../context/AuthContext'
+import { loginThunk } from '../store/slices/authSlice'
 import { validarLogin } from '../utils/validaciones'
 
 export default function Login() {
-  const { login } = useAuth()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
   const [form, setForm] = useState({ email: '', password: '' })
@@ -24,10 +25,10 @@ export default function Login() {
 
     setCargando(true)
     try {
-      await login(form)
+      await dispatch(loginThunk(form)).unwrap()
       navigate(location.state?.desde || '/', { replace: true })
     } catch (err) {
-      setErrorServidor(err.message)
+      setErrorServidor(err || 'Error al iniciar sesión')
     } finally {
       setCargando(false)
     }

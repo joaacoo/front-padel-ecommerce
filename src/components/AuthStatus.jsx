@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useSelector } from 'react-redux'
 
 export default function AuthStatus() {
-  const { usuario, estaAutenticado } = useAuth()
+  const usuario = useSelector((state) => state.auth.usuario)
+  const estaAutenticado = useSelector((state) => state.auth.estaAutenticado)
 
   if (!estaAutenticado) {
     return (

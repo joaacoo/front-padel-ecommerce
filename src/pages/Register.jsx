@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import FormField from '../components/FormField'
-import { useAuth } from '../context/AuthContext'
+import { registerThunk } from '../store/slices/authSlice'
 import { validarRegistro } from '../utils/validaciones'
 
 const INICIAL = {
@@ -10,7 +11,7 @@ const INICIAL = {
 }
 
 export default function Register() {
-  const { register } = useAuth()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [form, setForm] = useState(INICIAL)
   const [errores, setErrores] = useState({})
@@ -31,10 +32,10 @@ export default function Register() {
       // confirmarPassword es solo del front: no forma parte de RegistroUsuarioRequest
       // eslint-disable-next-line no-unused-vars
       const { confirmarPassword, ...datos } = form
-      await register(datos)
-      navigate('/', { replace: true })
+      await dispatch(registerThunk(datos)).unwrap()
+      navigate('/login', { replace: true })
     } catch (err) {
-      setErrorServidor(err.message)
+      setErrorServidor(err || 'Error al registrar usuario')
     } finally {
       setCargando(false)
     }

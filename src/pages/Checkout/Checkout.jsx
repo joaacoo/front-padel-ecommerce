@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useAuth } from '../../context/AuthContext'
 import { vaciarCarritoThunk } from '../../store/slices/carritoSlice'
 import { crearPedido } from '../../services/pedidoService'
 import { RUTAS } from '../../routes/rutas'
@@ -12,7 +11,7 @@ import './Checkout.css'
 
 export default function Checkout() {
   const dispatch = useDispatch()
-  const { usuario } = useAuth()
+  const usuario = useSelector((state) => state.auth.usuario)
   const items = useSelector((state) => state.carrito.items)
   const total = items.reduce(
     (acumulado, item) => acumulado + item.precioUnitario * item.cantidad,

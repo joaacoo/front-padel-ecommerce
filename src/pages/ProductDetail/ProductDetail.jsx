@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { obtenerProductoPorId } from '../../services/productoService'
 import { obtenerResenasPorProducto } from '../../services/resenaService'
-import { useAuth } from '../../context/AuthContext'
 import { agregarItemThunk } from '../../store/slices/carritoSlice'
 import { tieneStockDisponible } from '../../utils/carrito'
 import { RUTAS } from '../../routes/rutas'
@@ -18,7 +17,7 @@ export default function ProductDetail() {
   const { id } = useParams()
 
   const dispatch = useDispatch()
-  const { usuario } = useAuth()
+  const usuario = useSelector((state) => state.auth.usuario)
   const itemsCarrito = useSelector((state) => state.carrito.items)
   const [producto, setProducto] = useState(null)
   const [cantidad, setCantidad] = useState(1)

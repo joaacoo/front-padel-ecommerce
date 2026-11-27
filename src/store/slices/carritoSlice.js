@@ -12,9 +12,13 @@ const initialState = {
 
 export const obtenerCarritoThunk = createAsyncThunk(
   'carrito/obtenerCarrito',
-  async (usuarioId, { rejectWithValue }) => {
+  async (usuarioId, { getState, rejectWithValue }) => {
+    const epochInicial = getState().auth.sessionEpoch
     try {
       const data = await carritoService.obtenerCarrito(usuarioId)
+      if (getState().auth.sessionEpoch !== epochInicial) {
+        return rejectWithValue('Sesión cambiada')
+      }
       return Array.isArray(data) ? data : []
     } catch (error) {
       return rejectWithValue(error.message || 'Error al obtener el carrito')
@@ -24,17 +28,22 @@ export const obtenerCarritoThunk = createAsyncThunk(
 
 export const agregarItemThunk = createAsyncThunk(
   'carrito/agregarItem',
-  async ({ usuarioId, producto, cantidad = 1 }, { rejectWithValue }) => {
+  async ({ usuarioId, producto, cantidad = 1 }, { getState, rejectWithValue }) => {
+    const epochInicial = getState().auth.sessionEpoch
     try {
+      let itemCreado = null
       if (usuarioId) {
-        await carritoService.agregarItem(
+        itemCreado = await carritoService.agregarItem(
           usuarioId,
           producto.id,
           cantidad,
           producto.precio
         )
       }
-      return { producto, cantidad }
+      if (getState().auth.sessionEpoch !== epochInicial) {
+        return rejectWithValue('Sesión cambiada')
+      }
+      return { producto, cantidad, itemCreado }
     } catch (error) {
       return rejectWithValue(error.message || 'Error al agregar producto')
     }
@@ -43,9 +52,13 @@ export const agregarItemThunk = createAsyncThunk(
 
 export const modificarCantidadThunk = createAsyncThunk(
   'carrito/modificarCantidad',
-  async ({ itemId, cantidad, productoId }, { rejectWithValue }) => {
+  async ({ itemId, cantidad, productoId }, { getState, rejectWithValue }) => {
+    const epochInicial = getState().auth.sessionEpoch
     try {
       await carritoService.modificarCantidad(itemId, cantidad)
+      if (getState().auth.sessionEpoch !== epochInicial) {
+        return rejectWithValue('Sesión cambiada')
+      }
       return { productoId, cantidad }
     } catch (error) {
       return rejectWithValue(error.message || 'Error al actualizar cantidad')
@@ -55,10 +68,14 @@ export const modificarCantidadThunk = createAsyncThunk(
 
 export const quitarProductoThunk = createAsyncThunk(
   'carrito/quitarProducto',
-  async ({ usuarioId, productoId }, { rejectWithValue }) => {
+  async ({ usuarioId, productoId }, { getState, rejectWithValue }) => {
+    const epochInicial = getState().auth.sessionEpoch
     try {
       if (usuarioId) {
         await carritoService.quitarProducto(usuarioId, productoId)
+      }
+      if (getState().auth.sessionEpoch !== epochInicial) {
+        return rejectWithValue('Sesión cambiada')
       }
       return productoId
     } catch (error) {
@@ -69,10 +86,14 @@ export const quitarProductoThunk = createAsyncThunk(
 
 export const vaciarCarritoThunk = createAsyncThunk(
   'carrito/vaciarCarrito',
-  async (usuarioId, { rejectWithValue }) => {
+  async (usuarioId, { getState, rejectWithValue }) => {
+    const epochInicial = getState().auth.sessionEpoch
     try {
       if (usuarioId) {
         await carritoService.limpiarCarrito(usuarioId)
+      }
+      if (getState().auth.sessionEpoch !== epochInicial) {
+        return rejectWithValue('Sesión cambiada')
       }
       return []
     } catch (error) {
@@ -113,17 +134,20 @@ const carritoSlice = createSlice({
       })
       .addCase(agregarItemThunk.fulfilled, (state, action) => {
         state.cargando = false
-        const { producto, cantidad } = action.payload
+        const { producto, cantidad, itemCreado } = action.payload
         const existente = state.items.find(
           (item) => item.productoId === producto.id
         )
 
         if (existente) {
           existente.cantidad += cantidad
+          if (itemCreado?.id) {
+            existente.id = itemCreado.id
+          }
         } else {
           state.items.push(
             normalizarItem({
-              id: producto.id,
+              id: itemCreado?.id ?? producto.id,
               productoId: producto.id,
               productoNombre: producto.nombre,
               cantidad,

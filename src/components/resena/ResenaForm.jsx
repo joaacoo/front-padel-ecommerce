@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext'
+import { useSelector } from 'react-redux'
 import { crearResena } from '../../services/resenaService'
 import { validarResena } from '../../utils/validaciones'
 import { RUTAS } from '../../routes/rutas'
@@ -16,7 +16,7 @@ import './ResenaForm.css'
  *  - onCreada: se llama con la reseña creada, para actualizar la lista
  */
 export default function ResenaForm({ productoId, onCreada }) {
-  const { usuario } = useAuth()
+  const usuario = useSelector((state) => state.auth.usuario)
   const [puntuacion, setPuntuacion] = useState(0)
   const [comentario, setComentario] = useState('')
   const [errores, setErrores] = useState({})

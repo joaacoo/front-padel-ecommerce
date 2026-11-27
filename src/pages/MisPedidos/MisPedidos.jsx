@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext'
+import { useSelector } from 'react-redux'
 import { obtenerPedidos } from '../../services/pedidoService'
 import { formatearFecha, formatearPrecio } from '../../utils/formato'
 import { RUTAS } from '../../routes/rutas'
@@ -37,7 +37,7 @@ function ListaPedidos({ usuarioId }) {
 }
 
 export default function MisPedidos() {
-  const { usuario } = useAuth()
+  const usuario = useSelector((state) => state.auth.usuario)
   return <main className="compra contenedor">
     <h1>Mis pedidos</h1>
     <p>Consultá tus compras, desde la más reciente.</p>

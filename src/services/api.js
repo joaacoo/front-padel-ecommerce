@@ -41,14 +41,10 @@ export async function pedir({ mock, ruta, metodo = 'GET', cuerpo }) {
   const headers = {}
   if (cuerpo !== undefined) headers['Content-Type'] = 'application/json'
 
-  // El token del login viaja en cada pedido protegido.
-  // Convención: el Login lo guarda con localStorage.setItem('token', ...) (ver docs/guia-frontend.md).
-  const token = localStorage.getItem('token')
-  if (token) headers.Authorization = `Bearer ${token}`
-
   const respuesta = await fetch(`${API_URL}${ruta}`, {
     method: metodo,
     headers,
+    credentials: 'include',
     body: cuerpo !== undefined ? JSON.stringify(cuerpo) : undefined,
   })
   return leerRespuesta(respuesta)
