@@ -1,0 +1,113 @@
+.mis-productos {
+  padding-block: var(--espacio-7);
+  min-height: 65vh;
+}
+
+.mis-productos__encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--espacio-5);
+  margin-bottom: var(--espacio-6);
+}
+
+.mis-productos__etiqueta,
+.mis-productos__sin-stock {
+  display: inline-block;
+  padding: var(--espacio-1) var(--espacio-2);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.mis-productos__etiqueta {
+  color: var(--azul);
+  background: var(--azul-suave);
+  margin-bottom: var(--espacio-3);
+}
+
+.mis-productos__resumen {
+  margin-bottom: 0;
+  color: var(--gris-texto);
+}
+
+.mis-productos__publicar { text-decoration: none; }
+
+.mis-productos__tabla-contenedor {
+  overflow-x: auto;
+  border: 1px solid var(--linea);
+  background: var(--blanco);
+}
+
+.mis-productos__tabla {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.mis-productos__tabla th,
+.mis-productos__tabla td {
+  padding: var(--espacio-4);
+  border-bottom: 1px solid var(--linea);
+}
+
+.mis-productos__tabla thead {
+  color: var(--gris-texto);
+  text-transform: uppercase;
+}
+
+.mis-productos__tabla tbody tr:last-child > * { border-bottom: 0; }
+
+.mis-productos__producto {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  min-width: 220px;
+  overflow-wrap: anywhere;
+}
+
+.mis-productos__imagen {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: var(--fondo);
+  color: var(--gris-texto);
+  font-weight: 400;
+  text-align: center;
+}
+
+.mis-productos__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.mis-productos__precio {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.mis-productos__sin-stock {
+  color: var(--peligro);
+  background: var(--peligro-suave);
+  white-space: nowrap;
+}
+
+.mis-productos__acciones {
+  display: flex;
+  gap: var(--espacio-2);
+}
+
+.mis-productos__confirmacion { color: var(--exito); }
+.mis-productos__confirmacion:empty { margin: 0; }
+
+@media (max-width: 600px) {
+  .mis-productos {
+    padding-block: var(--espacio-5);
+    padding-inline: var(--espacio-4);
+  }
+  .mis-productos__publicar { width: 100%; }
+  .mis-productos__acciones { flex-direction: column; }
+}

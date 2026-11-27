@@ -9,6 +9,13 @@ import { pedir, USAR_MOCKS } from './api'
 export const obtenerProductos = () =>
   pedir({ mock: 'products.json', ruta: '/api/productos' })
 
+// El backend identifica al administrador mediante la cookie de sesión.
+export const obtenerMisProductos = () =>
+  pedir({ mock: 'mis-productos.json', ruta: '/api/productos/mis-productos' })
+
+export const eliminarProducto = (id) =>
+  pedir({ mock: 'vacio.json', ruta: `/api/productos/${id}`, metodo: 'DELETE' })
+
 // Obtiene la lista de categorías disponibles
 export const obtenerCategorias = () =>
   pedir({ mock: 'categorias.json', ruta: '/api/productos/categorias' })
