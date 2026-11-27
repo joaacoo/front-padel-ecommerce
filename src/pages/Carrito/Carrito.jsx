@@ -36,6 +36,7 @@ export default function Carrito() {
 
     dispatch(
       modificarCantidadThunk({
+        usuarioId: usuario?.id,
         itemId: item.id,
         cantidad: nuevaCantidad,
         productoId

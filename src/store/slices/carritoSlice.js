@@ -52,10 +52,12 @@ export const agregarItemThunk = createAsyncThunk(
 
 export const modificarCantidadThunk = createAsyncThunk(
   'carrito/modificarCantidad',
-  async ({ itemId, cantidad, productoId }, { getState, rejectWithValue }) => {
+  async ({ usuarioId, itemId, cantidad, productoId }, { getState, rejectWithValue }) => {
     const epochInicial = getState().auth.sessionEpoch
     try {
-      await carritoService.modificarCantidad(itemId, cantidad)
+      if (usuarioId) {
+        await carritoService.modificarCantidad(itemId, cantidad)
+      }
       if (getState().auth.sessionEpoch !== epochInicial) {
         return rejectWithValue('Sesión cambiada')
       }
