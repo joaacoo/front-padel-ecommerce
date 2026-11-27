@@ -1,0 +1,20 @@
+[
+  {
+    "id": 3,
+    "nombre": "Paleta Control 360",
+    "descripcion": "Paleta de control ideal para jugadores que buscan precisión en cada golpe y excelente maniobrabilidad.",
+    "precio": 245000,
+    "stock": 15,
+    "categoria": "Paletas",
+    "imagenUrl": "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": 4,
+    "nombre": "Paleta Head Speed Pro X",
+    "descripcion": "Diseñada para jugadores veloces que combinan control y potencia en la red. Tecnología Auxetic integrada.",
+    "precio": 320000,
+    "stock": 0,
+    "categoria": "Paletas",
+    "imagenUrl": "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?auto=format&fit=crop&w=600&q=80"
+  }
+]

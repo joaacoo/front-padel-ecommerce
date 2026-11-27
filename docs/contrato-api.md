@@ -177,18 +177,29 @@ Sin medio de pago: el TPO dice "sin procesamiento de pago". Al confirmar, el bac
 
 ---
 
-## 8. Administración de productos (sin asignar)
+## 8. Administración de productos (Persona 2)
 
-El TPO pide "Gestión de Productos", pero no está en el reparto de roles.
+Requiere sesión mediante cookie y rol ADMIN. `pedir()` envía la cookie con `credentials: 'include'`.
 
 | Pantalla | Pedido | Envía | Devuelve |
 |---|---|---|---|
-| Mis productos | `GET /api/productos` | — | **200** `ProductoResponse[]` |
+| Mis productos | `GET /api/productos/mis-productos` | — | **200** `ProductoResponse[]` propios, ordenados por nombre (puede estar vacío) |
 | Publicar | `POST /api/productos` | `ProductoRequest` | **201** `ProductoResponse` |
 | Editar / cambiar stock | `PUT /api/productos/{id}` | `ProductoRequest` completo | **200** `ProductoResponse` |
 | Eliminar | `DELETE /api/productos/{id}` | — | **204** |
 
 `ProductoRequest`: `nombre`* , `descripcion`, `precio`* (> 0), `stock`* (≥ 0), `categoria`*, `imagenUrl`.
+
+El backend asigna al administrador autenticado al publicar; no recibe un dueño desde el frontend.
+Editar y eliminar requieren ser el dueño: responden **404** si el producto no existe o no pertenece al administrador.
+Sin sesión se devuelve **401**; con rol USER, **403**. El catálogo `GET /api/productos` sigue siendo público.
+
+Los productos anteriores sin `administrador_id` siguen en el catálogo, pero no aparecen en “Mis productos”
+ni se pueden editar o eliminar hasta que se les asigne su dueño real en la base de datos.
+La configuración actual de Hibernate (`ddl-auto=update`) agrega la relación nullable al iniciar el backend.
+
+En modo mocks, `mis-productos.json` simula las publicaciones de un administrador y `vacio.json`
+simula la eliminación exitosa. Las eliminaciones simuladas no persisten al recargar.
 
 ---
 
@@ -203,6 +214,6 @@ El TPO pide "Gestión de Productos", pero no está en el reparto de roles.
 | 5 | `USO_API.md` dice `/api/users/...` | Documentación equivocada | Corregir a `/api/usuarios/...` |
 | 6 | Carrito, pedidos y reseñas reciben `usuarioId` del front | Un usuario logueado puede ver o cambiar lo de otro | Sacar al usuario del token |
 | 7 | `apellido` y `nombreUsuario` son opcionales en el registro | El TPO los pide como obligatorios | Agregar `@NotBlank` |
-| 8 | `Producto` no tiene usuario dueño | El TPO dice que quien publica maneja su stock | Relación `Producto` → `Usuario` |
+| 8 | Resuelto: `Producto` registra su administrador | Las publicaciones anteriores necesitan asignación de dueño | Asignar `administrador_id` únicamente cuando se conozca el dueño real |
 | 9 | `imagenUrl` es un texto: no hay subida de archivos | El TPO dice "adjuntando una o más fotos" | Por ahora, una URL |
 | 10 | `ResenaResponse` trae `usuarioId` pero no el nombre | La reseña no puede mostrar quién la escribió | Agregar `usuarioNombre` |
