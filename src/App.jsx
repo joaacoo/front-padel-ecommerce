@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import { verificarSesionThunk } from './store/slices/authSlice'
 import Layout from './components/layout/Layout'
-import ProtectedRoute from './components/ProtectedRoute'
 import RutaAdmin from './routes/RutaAdmin'
 import RutaProtegida from './routes/RutaProtegida'
 import { RUTAS } from './routes/rutas'
@@ -39,7 +38,7 @@ export default function App() {
           <Route path={RUTAS.CARRITO} element={<Carrito />} />
           <Route path={RUTAS.CHECKOUT} element={<Checkout />} />
           <Route path={RUTAS.MIS_PEDIDOS} element={<MisPedidos />} />
-          <Route path={RUTAS.PERFIL} element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path={RUTAS.PERFIL} element={<Profile />} />
 
           <Route element={<RutaAdmin />}>
             <Route path={RUTAS.MIS_PRODUCTOS} element={<MisProductos />} />
